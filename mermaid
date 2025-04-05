@@ -1,0 +1,83 @@
+graph LR
+    subgraph Developer/Operator
+        direction LR
+        DevOps[Terraform Configuration Files\n(EKS Cluster, Node Group, NVIDIA Addons)] --> Terraform[Terraform CLI];
+    end
+
+    subgraph AWS Account
+        subgraph EKS Cluster Control Plane
+            EKS_ControlPlane["EKS Control Plane\n(Managed by AWS)"];
+        end
+
+        subgraph VPC
+            direction LR
+            PublicSubnet["Public Subnets"];
+            PrivateSubnet["Private Subnets"];
+            RouteTables;
+            InternetGateway;
+            NATGateway;
+
+            PublicSubnet -- Routes --> InternetGateway;
+            PrivateSubnet -- Routes --> NATGateway;
+            EKS_ControlPlane -- Network --> PublicSubnet;
+            EKS_ControlPlane -- Network --> PrivateSubnet;
+        end
+
+        subgraph Managed Node Group (CPU - Optional)
+            EC2_CPU_Nodes["EC2 Instances\n(Standard CPU)"];
+            EKS_ControlPlane -- Manages --> EC2_CPU_Nodes;
+            EC2_CPU_Nodes -- Network --> PrivateSubnet;
+        end
+
+        subgraph Terraform EKS Blueprints
+            Terraform --> EKS_Blueprint_Module["EKS Blueprints Module\n(Node Group Configuration,\nAddons: NVIDIA Device Plugin,\nGPU Operator)"];
+            EKS_Blueprint_Module -- Configures --> EKS_ControlPlane;
+            EKS_Blueprint_Module -- Provisions --> Managed_GPU_NG["Managed Node Group\n(NVIDIA GPU)"];
+        end
+
+        subgraph Managed Node Group (NVIDIA GPU)
+            EC2_GPU_Nodes["EC2 Instances\n(NVIDIA GPUs)"];
+            NVIDIA_Drivers["NVIDIA Drivers\n(Installed on Nodes)"];
+            Kubelet["kubelet"];
+            ContainerRuntime["Container Runtime\n(e.g., Docker, containerd)"];
+            NVIDIA_DevicePlugin["NVIDIA Device Plugin\n(DaemonSet)"];
+            GPU_Operator["NVIDIA GPU Operator\n(Deployment)"];
+
+            Managed_GPU_NG -- Contains --> EC2_GPU_Nodes;
+            EC2_GPU_Nodes -- Installs --> NVIDIA_Drivers;
+            EC2_GPU_Nodes -- Runs --> Kubelet;
+            Kubelet -- Uses --> ContainerRuntime;
+            EKS_ControlPlane -- Manages --> Managed_GPU_NG;
+            EC2_GPU_Nodes -- Network --> PrivateSubnet;
+            EKS_ControlPlane -- Deploys/Manages --> NVIDIA_DevicePlugin;
+            EKS_ControlPlane -- Deploys/Manages --> GPU_Operator;
+            Kubelet -- Registers GPUs via --> NVIDIA_DevicePlugin;
+            GPU_Operator -- Manages --> NVIDIA_Drivers;
+            GPU_Operator -- Manages --> GPU_Workloads["GPU Accelerated\nWorkloads (Pods)"];
+            GPU_Workloads -- Runs On --> EC2_GPU_Nodes;
+        end
+    end
+
+    Terraform -- Provisions --> EKS_ControlPlane;
+    Terraform -- Provisions --> VPC;
+    Terraform -- Provisions --> Managed_GPU_NG;
+    Terraform -- Provisions --> Managed_CPU_NG;
+
+    style DevOps fill:#ccf,stroke:#333,stroke-width:2px;
+    style Terraform fill:#9cf,stroke:#333,stroke-width:2px;
+    style AWS_Account fill:#f9c,stroke:#333,stroke-width:2px;
+    style EKS_ControlPlane fill:#fcc,stroke:#333,stroke-width:2px;
+    style VPC fill:#cff,stroke:#333,stroke-width:2px;
+    style PublicSubnet fill:#e0f7fa,stroke:#333,stroke-width:1px;
+    style PrivateSubnet fill:#e0f2f7,stroke:#333,stroke-width:1px;
+    style Managed_GPU_NG fill:#dcedc8,stroke:#333,stroke-width:2px;
+    style EC2_GPU_Nodes fill:#aed581,stroke:#333,stroke-width:1px;
+    style NVIDIA_Drivers fill:#81c784,stroke:#333,stroke-width:1px;
+    style Kubelet fill:#f0f4c3,stroke:#333,stroke-width:1px;
+    style ContainerRuntime fill:#fff9c4,stroke:#333,stroke-width:1px;
+    style NVIDIA_DevicePlugin fill:#a5d6a7,stroke:#333,stroke-width:1px;
+    style GPU_Operator fill:#80cbc4,stroke:#333,stroke-width:1px;
+    style GPU_Workloads fill:#c8e6c9,stroke:#333,stroke-width:1px;
+    style Managed_CPU_NG fill:#f5f5f5,stroke:#333,stroke-width:2px;
+    style EC2_CPU_Nodes fill:#e0e0e0,stroke:#333,stroke-width:1px;
+    style EKS_Blueprint_Module fill:#b3e5fc,stroke:#333,stroke-width:2px;

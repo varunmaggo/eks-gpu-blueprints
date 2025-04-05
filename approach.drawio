@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" modified="2025-04-06T00:02:58.708Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="W-QYvQ68-h48P36-f78j" version="24.0.6" type="device">
+  <diagram name="Page-1" id="f951a338-5b26-4124-a74a-0119381500a2">
+    <mxGraph model="1" style="default-style=1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <mxCell id="WIyW-n098021-J221-1" value="Developer/Operator" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+        <mxGeometry x="30" y="30" width="220" height="100" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-2" value="Terraform Configuration Files&#xa;(EKS Cluster, Node Group, NVIDIA Addons)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-1">
+        <mxGeometry x="10" y="30" width="200" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-3" value="Terraform CLI" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-1">
+        <mxGeometry x="10" y="70" width="200" height="20" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-4" value="AWS Account" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+        <mxGeometry x="300" y="30" width="520" height="580" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-5" value="EKS Cluster Control Plane" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyW-n098021-J221-4">
+        <mxGeometry x="20" y="30" width="220" height="80" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-6" value="EKS Control Plane&#xa;(Managed by AWS)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-5">
+        <mxGeometry x="10" y="30" width="200" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-7" value="VPC" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyW-n098021-J221-4">
+        <mxGeometry x="260" y="30" width="240" height="180" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-8" value="Public Subnets" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-7">
+        <mxGeometry x="10" y="30" width="220" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-9" value="Private Subnets" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-7">
+        <mxGeometry x="10" y="60" width="220" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-10" value="Route Tables" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-7">
+        <mxGeometry x="10" y="90" width="220" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-11" value="Internet Gateway" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-7">
+        <mxGeometry x="10" y="120" width="220" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-12" value="NAT Gateway" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-7">
+        <mxGeometry x="10" y="150" width="220" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-13" value="Managed Node Group (CPU - Optional)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyW-n098021-J221-4">
+        <mxGeometry x="20" y="130" width="220" height="80" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-14" value="EC2 Instances&#xa;(Standard CPU)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-13">
+        <mxGeometry x="10" y="30" width="200" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-15" value="Terraform EKS Blueprints" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyW-n098021-J221-4">
+        <mxGeometry x="20" y="230" width="220" height="100" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-16" value="EKS Blueprints Module&#xa;(Node Group Configuration,&#xa;Addons: NVIDIA Device Plugin,&#xa;GPU Operator)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-15">
+        <mxGeometry x="10" y="30" width="200" height="60" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-17" value="Managed Node Group&#xa;(NVIDIA GPU)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="WIyW-n098021-J221-4">
+        <mxGeometry x="20" y="350" width="480" height="210" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-18" value="EC2 Instances&#xa;(NVIDIA GPUs)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="10" y="30" width="200" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-19" value="NVIDIA Drivers&#xa;(Installed on Nodes)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="230" y="30" width="240" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-20" value="kubelet" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="10" y="80" width="200" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-21" value="Container Runtime&#xa;(e.g., Docker, containerd)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="230" y="80" width="240" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-22" value="NVIDIA Device Plugin&#xa;(DaemonSet)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="10" y="120" width="200" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-23" value="NVIDIA GPU Operator&#xa;(Deployment)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="230" y="120" width="240" height="40" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-24" value="GPU Accelerated&#xa;Workloads (Pods)" style="rounded=1;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="WIyW-n098021-J221-17">
+        <mxGeometry x="10" y="170" width="200" height="30" as="geometry" />
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-25" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="250" y="60" as="sourcePoint" />
+          <mxPoint x="310" y="60" as="targetPoint" />
+        </mxGeometry>
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-26" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="250" y="90" as="sourcePoint" />
+          <mxPoint x="310" y="90" as="targetPoint" />
+        </mxGeometry>
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-27" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="250" y="160" as="sourcePoint" />
+          <mxPoint x="310" y="160" as="targetPoint" />
+        </mxGeometry>
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-28" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="250" y="260" as="sourcePoint" />
+          <mxPoint x="310" y="260" as="targetPoint" />
+        </mxGeometry>
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-29" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="250" y="410" as="sourcePoint" />
+          <mxPoint x="310" y="410" as="targetPoint" />
+        </mxGeometry>
+      </mxCell>
+      <mxCell id="WIyW-n098021-J221-30" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxGeometry width="50" height="50" relative="1" as="geometry">
+          <mxPoint x="400" y="100" as="sourcePoint" />
+          <mxPoint x="310
